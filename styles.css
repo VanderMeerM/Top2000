@@ -1,0 +1,63 @@
+    :root {
+     --red: rgb(217, 21, 27)
+    }
+    
+    .main {
+        text-align: center;
+        background-color: var(--red);
+    }
+
+    .segment {
+      width: fit-content;
+      display: inline-flex;
+       
+    }
+
+    form {
+        margin: 20px;
+        color:white;
+    }
+
+    #all_results {
+        padding: 10px;
+        background-color: var(--red);
+        color: white;
+    }
+
+    #results {
+        font-style: italic;
+        margin: 0 0 10px 10%;
+    }
+
+th, td {
+     text-align: left;
+     min-width: 100px;
+     padding: 5px;
+    }
+
+    tr {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    tr:nth-child(even) {
+        background-color: rgb(229, 223, 223);
+        
+    }
+
+.container_table table {
+    width: 80%;
+    margin: auto;
+}
+
+.width_cell {
+   width: 70px;
+}
+
+@media (max-width: 500px) {
+
+    .container_table {
+        width: 100%;
+        margin: auto;
+    }
+}
+
