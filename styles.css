@@ -13,7 +13,13 @@
        
     }
 
-    form {
+    select, #title_artist, 
+    #notering {
+        width: 150px;
+        margin-top:5px;
+    }
+
+        form {
         margin: 20px;
         color:white;
     }
@@ -42,6 +48,16 @@ th, td {
     tr:nth-child(even) {
         background-color: rgb(229, 223, 223);
         
+    }
+
+    td a img {
+        width: 25px;
+        height: auto;
+    }
+
+    td a {
+        display: block;
+        margin: 0 30%
     }
 
 .container_table table {

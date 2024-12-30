@@ -119,6 +119,7 @@ echo '
 <td>'.$top_title. '</td> 
 <td>'.$top_artist. '</td> 
 <td>'.$top_year. '</td> 
+<td> <a target="_blank" href="https://www.youtube.com/results?search_query= '. $top_title . '+' .$top_artist. '"><img src="./YouTube.png"></a></td> 
 </tr>';
 
 
