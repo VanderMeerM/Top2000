@@ -19,12 +19,23 @@
         margin-top:5px;
     }
 
-        form {
-        margin: 20px;
-        color:white;
+  div.tablecontainer {
+  overflow-x: auto;
+}
+
+.tablecontainer {
+   width: 80%;
+   margin: auto;
+
+}
+     
+  form {
+    margin: 20px;
+    color:white;
     }
 
-    #all_results {
+    #all_results, 
+    #newhits {
         padding: 10px;
         background-color: var(--red);
         color: white;
@@ -60,13 +71,17 @@ th, td {
         margin: 0 30%
     }
 
-.container_table table {
-    width: 80%;
-    margin: auto;
-}
 
 .width_cell {
    width: 70px;
+}
+
+@media (max-width: 600px) {
+
+ .segment {
+    display: block;
+      
+    }
 }
 
 @media (max-width: 500px) {

@@ -12,8 +12,6 @@
 
 <?php
 
-$current_year = date('Y');
-
 require('connection.php');
 
 $uniqueYears = "SELECT DISTINCT Jaar from Top2000_$current_year ORDER BY Jaar ASC";
@@ -54,16 +52,24 @@ while ($row = mysqli_fetch_array($showYears)) {
 
 <br><br>
 <form action="./index.php" method="post">
-  <input type="submit" value='Toon gehele lijst' id="all_results" name="all_results"><br><br>
+  <input type="submit" value='Toon gehele lijst' id="all_results" name="all_results"><br><br> 
+ <input  type="submit"value="Nieuw in de Top 2000" id="newhits" name="newhits"><br>
 </form>
 
 
 
 <?php 
 
-if (!empty($_POST['notering']) && $_POST['notering'] > 0 && $_POST['notering'] <= 2000 ) {
-    $allHits = 'SELECT * from Top2000_2025 WHERE Notering= ' . $_POST['notering'];
+if (isset($_POST['newhits'])) {
+$allHits = "SELECT * from Top2000_$current_year WHERE Notering_ly IS NULL";
 }
+
+/*
+
+if (!empty($_POST['notering']) && $_POST['notering'] > 0 && $_POST['notering'] <= 2000 ) {
+    $allHits = 'SELECT * from Top2000_' . $current_year .' WHERE Notering= ' . $_POST['notering'];
+}
+*/
 
 elseif (!empty($_POST['title_artist'])) {
     $title_artist = $_POST['title_artist'];
@@ -72,13 +78,11 @@ elseif (!empty($_POST['title_artist'])) {
 }
 
 elseif (!empty($_POST['jaar'])) {
-    $allHits = 'SELECT * from Top2000_2025 WHERE jaar = ' . $_POST['jaar'] . ' ORDER by Notering ASC';
+    $allHits = 'SELECT * from Top2000_' . $current_year . ' WHERE jaar = ' . $_POST['jaar'] . ' ORDER by Notering ASC';
 }
 
 else {
-    $allHits = "SELECT Notering, Artiest, Titel, Jaar from Top2000_$current_year ORDER by Notering ASC";
- // SELECT Notering from Top2000_2024 WHERE Titel LIKE '%Bohemian%' as In_2024"; 
-
+    $allHits = "SELECT * from Top2000_$current_year ORDER by Notering ASC";
 }
 
 $showAllHits = mysqli_query($connection, $allHits);
@@ -93,7 +97,7 @@ else {
 
 
 echo '
-<div class="container_table">'; 
+<div class="table_container">'; 
 
 if ($results > 1 && $results < 2000)  {
     echo '<div id="results">Aantal resultaten: ' . $results . '</div>';
@@ -102,26 +106,47 @@ if ($results > 1 && $results < 2000)  {
 echo '
 <table>
 <tr>
-<th class="width_cell">Nr.</th>
-<th> In ' . $current_year-1 . ' </th>
-<th>Titel</th>
+<th class="width_cell">Nr.</th>';
+//<th> In ' . $current_year-1 . ' </th>
+echo '<th>Titel</th>
 <th>Artiest</th>
 <th>Jaar</th>
-</tr>
-';
+</tr>';
 
 while ($row = mysqli_fetch_assoc($showAllHits)) {
    
   $top_notering = $row['Notering'];
-  $notering_last_year = $row['In_2024'];
+  $notering_last_year = $row['Notering_ly'];
   $top_title = $row['Titel'];
   $top_artist = $row['Artiest'];
   $top_year = $row['Jaar'];
 
+  if ($top_notering > $notering_last_year) {
+    $arrow = '&#8593 (+'. $top_notering-$notering_last_year . ')';
+  }
+  else if ($top_notering < $notering_last_year) {
+    $arrow = '&#8595 ('. $top_notering-$notering_last_year . ')';
+  }
+  else {
+    $arrow='-';
+  }
+
+
+if ($top_notering == $_POST['notering']) {
+    echo '<tr id="sel_num" style="background-color: yellow">';
+
+    ?> 
+    <script>
+    document.getElementById("sel_num").scrollIntoView(true);
+    </script>
+
+<?php
+} else {
+echo '<tr>';
+}
+
 echo '
-<tr>
-<td>'.$top_notering. '</td>
-<td>'.$notering_last_year. '</td> 
+<td>'.$top_notering. '  ' . $arrow . '</td>
 <td>'.$top_title. '</td> 
 <td>'.$top_artist. '</td> 
 <td>'.$top_year. '</td> 
