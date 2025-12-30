@@ -52,8 +52,11 @@ while ($row = mysqli_fetch_array($showYears)) {
 
 <br><br>
 <form action="./index.php" method="post">
+
+  <div class="btn_container">
   <input type="submit" value='Toon gehele lijst' id="all_results" name="all_results"><br><br> 
  <input  type="submit"value="Nieuw in de Top 2000" id="newhits" name="newhits"><br>
+</div>
 </form>
 
 
@@ -121,11 +124,18 @@ while ($row = mysqli_fetch_assoc($showAllHits)) {
   $top_artist = $row['Artiest'];
   $top_year = $row['Jaar'];
 
-  if ($top_notering > $notering_last_year) {
-    $arrow = '&#8593 (+'. $top_notering-$notering_last_year . ')';
+  if (empty($notering_last_year)) {
+     $arrow = '<span style="font-weight:bold"><i> NIEUW!</i></span>';
+  }
+
+  else if ($top_notering > $notering_last_year) {
+    $arrow = '&#8595 (-'. $top_notering-$notering_last_year . ')';
+    $arrow = '<span style="color:red">&#8595 (-'. $top_notering-$notering_last_year . ')</span>';
+
   }
   else if ($top_notering < $notering_last_year) {
-    $arrow = '&#8595 ('. $top_notering-$notering_last_year . ')';
+   $arrow = '&#8593 (+'. (($top_notering-$notering_last_year) * -1) . ')';
+    $arrow = '<span style="color:green">&#8593 (+'. (($top_notering-$notering_last_year) * -1) . ')</span>';
   }
   else {
     $arrow='-';
@@ -133,7 +143,7 @@ while ($row = mysqli_fetch_assoc($showAllHits)) {
 
 
 if ($top_notering == $_POST['notering']) {
-    echo '<tr id="sel_num" style="background-color: yellow">';
+    echo '<tr id="sel_num">';
 
     ?> 
     <script>

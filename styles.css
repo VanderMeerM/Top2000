@@ -23,10 +23,18 @@
   overflow-x: auto;
 }
 
-.tablecontainer {
+.table_container {
    width: 80%;
    margin: auto;
+   
+}
 
+.btn_container {
+display: flex;
+}
+
+.btn_container input {
+    margin: 0 2%;
 }
      
   form {
@@ -45,6 +53,10 @@
         font-style: italic;
         margin: 0 0 10px 10%;
     }
+
+   #sel_num {
+    background-color: yellow;
+   }
 
 th, td {
      text-align: left;
@@ -86,7 +98,7 @@ th, td {
 
 @media (max-width: 500px) {
 
-    .container_table {
+    .table_container {
         width: 100%;
         margin: auto;
     }
