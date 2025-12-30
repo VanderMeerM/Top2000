@@ -23,17 +23,17 @@ $showYears = mysqli_query($connection, $uniqueYears);
 
 <div class="segment">
 
-<form action="./index.php" method="post">
+<form action="./" method="post">
   <label for="notering">Ga direct naar een notering</label><br>
   <input type="number" id="notering" min=1 max= 2000 placeholder = '1-2000' name="notering"><br><br>
 </form>
 
-<form action="./index.php" method="post">
+<form action="./" method="post">
 <label for="title_artist">Zoek op titel / artiest</label><br>
   <input type="text" id="title_artist" name="title_artist"><br><br>
 </form>
 
-<form action="./index.php" method="post">
+<form action="./" method="post">
 
 <label for="jaar">Alle noteringen uit een jaar</label><br>
 <select name="jaar" onchange="this.form.submit()">
@@ -51,11 +51,11 @@ while ($row = mysqli_fetch_array($showYears)) {
 </div>
 
 <br><br>
-<form action="./index.php" method="post">
+<form action="./" method="post">
 
   <div class="btn_container">
   <input type="submit" value='Toon gehele lijst' id="all_results" name="all_results"><br><br> 
- <input  type="submit"value="Nieuw in de Top 2000" id="newhits" name="newhits"><br>
+ <input  type="submit"value="(Op)nieuw in de Top 2000" id="newhits" name="newhits"><br>
 </div>
 </form>
 
@@ -125,7 +125,7 @@ while ($row = mysqli_fetch_assoc($showAllHits)) {
   $top_year = $row['Jaar'];
 
   if (empty($notering_last_year)) {
-     $arrow = '<span style="font-weight:bold"><i> NIEUW!</i></span>';
+     $arrow = '<span style="font-weight:bold"><i> NW</i></span>';
   }
 
   else if ($top_notering > $notering_last_year) {
