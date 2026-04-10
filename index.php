@@ -12,7 +12,17 @@
 
 <?php
 
-require('connection.php');
+require ('../connect_db.php');
+
+if (date('m') == 12) {
+    $current_year = date('Y');
+}
+else {
+    $current_year = date('Y') - 1;
+};
+
+$previous_year = $current_year - 1; 
+
 
 $uniqueYears = "SELECT DISTINCT Jaar from Top2000_$current_year ORDER BY Jaar ASC";
 $showYears = mysqli_query($connection, $uniqueYears);
